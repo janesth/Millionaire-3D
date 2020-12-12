@@ -46,6 +46,7 @@ public abstract class GameFormat
     private string[] moneyTreePrizeUK = new string[]
     {
         "",
+		"50",
         "100",
         "200",
         "300",
@@ -58,10 +59,29 @@ public abstract class GameFormat
         "32,000",
         "64,000",
         "125,000",
-        "250,000",
         "500,000",
         "1,000,000",
     };
+
+	private string[] moneyTreePrizeDE = new string[]
+	{
+		"€ 0",
+		"€ 50",
+		"€ 100",
+		"€ 200",
+		"€ 300",
+		"€ 500",
+		"€ 1,000",
+		"€ 2,000",
+		"€ 4,000",
+		"€ 8,000",
+		"€ 16,000",
+		"€ 32,000",
+		"€ 64,000",
+		"€ 125,000",
+		"€ 500,000",
+		"€ 1,000,000",
+	};
 
     public static string[] moneyTreeUa = new string[]
     {
@@ -84,22 +104,41 @@ public abstract class GameFormat
 
     public static string[] moneyTreeUK = new string[]
        {
-        "15    1,000,000",
-        "14    500,000",
-        "13    250,000",
-        "12    125,000",
-        "11    64,000",
-        "10    32,000",
-        " 9    16,000",
-        " 8    8,000",
-        " 7    4,000",
-        " 6    2,000",
-        " 5    1,000",
-        " 4    500",
-        " 3    300",
-        " 2    200",
-        " 1    100",
+        " 15    1,000,000",
+        " 14    500,000",
+        " 13    125,000",
+        " 12    64,000",
+        " 11    32,000",
+        " 10    16,000",
+        "  9    8,000",
+        "  8    4,000",
+        "  7    2,000",
+        "  6    1,000",
+        "  5    500",
+        "  4    300",
+        "  3    200",
+        "  2    100",
+        "  1    50",
        };
+
+	public static string[] moneyTreeDE = new string[]
+	{
+		" 15    € 1,000,000",
+		" 14    € 500,000",
+		" 13    € 125,000",
+		" 12    € 64,000",
+		" 11    € 32,000",
+		" 10    € 16,000",
+		"  9    € 8,000",
+		"  8    € 4,000",
+		"  7    € 2,000",
+		"  6    € 1,000",
+		"  5    € 500",
+		"  4    € 300",
+		"  3    € 200",
+		"  2    € 100",
+		"  1    € 50",
+	};
 
     public Lifeline[] lifelines;
 
@@ -125,7 +164,7 @@ public abstract class GameFormat
         {
             throw new UnityException("Question with this number does not exist!");
         }
-
+			
         if (GameManager.itIsEnglishVersion)
         {
             return moneyTreePrizeUK[questionNumber];

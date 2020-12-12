@@ -165,36 +165,41 @@ public class GameProcess : MonoBehaviour
         }
     }
 
-	public IEnumerator RevealAnswer()
-	{
-		// wait 1 to 3 seconds before revealing correct answer
-		while (state == State.FINAL_ANSWER_GIVEN) {
-			if (Input.GetKeyDown (KeyCode.C)) {
-				if (question.IsAnswerCorrect ()) {
-					// if it's last question
-					if (currentQuestionNumber == gameFormat.QuestionCount) {
-						state = State.MILLION_WON;
-						//Debug.Log("Bravo! You are a millionaire!");
-						PlaySound ();
-						UIManager.instance.StartCoroutine (UIManager.instance.CorrectAnswer (question.finalAnswer, "1 000 000"));
-					}else {
-						state = State.CORRECT_ANSWER;
-						PlaySound ();
-						UIManager.instance.StartCoroutine (UIManager.instance.CorrectAnswer (question.finalAnswer, gameFormat.GetPrizeForQuestion (currentQuestionNumber)));
-						yield return new WaitForSeconds (1);
-					}
-				} else {
-					state = State.WRONG_ANSWER;
-					PlaySound ();
-					UIManager.instance.StartCoroutine (UIManager.instance.WrondAnswer (question.CorrectAnswer, gameFormat.GetGuaranteedPrizeForQuestion (currentQuestionNumber)));
-					//Debug.Log("Wrong! Your total prize is " + gameFormat.GetGuaranteedPrizeForQuestion(currentQuestionNumber));
-					state = State.GAME_IS_NOT_STARTED;
-					currentQuestionNumber = 0;
-				}
-			}
-		}
-	}
-	
+    public IEnumerator RevealAnswer()
+    {
+        // wait 1 to 3 seconds before revealing correct answer
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
+        if ((state == State.FINAL_ANSWER_GIVEN) && (question.IsAnswerCorrect()))
+        {
+            // if it's last question
+            if (currentQuestionNumber == gameFormat.QuestionCount)
+            {
+                state = State.MILLION_WON;
+                //Debug.Log("Bravo! You are a millionaire!");
+                PlaySound();
+                UIManager.instance.StartCoroutine(UIManager.instance.CorrectAnswer(question.finalAnswer, "1 000 000"));
+
+            }
+            //if it's not last question
+            else
+            {
+                state = State.CORRECT_ANSWER;
+                PlaySound();
+                
+                UIManager.instance.StartCoroutine(UIManager.instance.CorrectAnswer(question.finalAnswer, gameFormat.GetPrizeForQuestion(currentQuestionNumber)));
+                yield return new WaitForSeconds(1);
+            }
+        }
+        else
+        {
+            state = State.WRONG_ANSWER;
+            PlaySound();
+            UIManager.instance.StartCoroutine(UIManager.instance.WrondAnswer(question.CorrectAnswer, gameFormat.GetGuaranteedPrizeForQuestion(currentQuestionNumber)));
+            //Debug.Log("Wrong! Your total prize is " + gameFormat.GetGuaranteedPrizeForQuestion(currentQuestionNumber));
+            state = State.GAME_IS_NOT_STARTED;
+            currentQuestionNumber = 0;
+        }
+    }
 
 
     public IEnumerator LetsPlayLD()

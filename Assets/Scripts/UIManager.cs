@@ -569,6 +569,10 @@ public class UIManager : MonoBehaviour
             //hiding all diamonds
             moneyTreePanel.transform.GetChild(i).GetChild(2).gameObject.SetActive(false);
 
+			if (GameManager.itIsGermanVersion) {
+				moneyTreePanel.transform.GetChild(i).GetChild(1).GetComponent<Text>().text = GameFormat.moneyTreeDE[i - 3];
+			}
+
             if (GameManager.itIsUkrainianVersion)
             {
                 moneyTreePanel.transform.GetChild(i).GetChild(1).GetComponent<Text>().text = GameFormat.moneyTreeUa[i - 3];
@@ -726,7 +730,7 @@ public class UIManager : MonoBehaviour
         //highlighting and changing text color to black
         moneyTreePanel.transform.GetChild(18 - questionNumber).GetChild(0).gameObject.SetActive(true);
         moneyTreePanel.transform.GetChild(18 - questionNumber).GetChild(1).GetComponent<Text>().color = new Color32(0, 0, 0, 255);
-        moneyTreePanel.transform.GetChild(18 - questionNumber).GetChild(2).gameObject.SetActive(true);
+        //moneyTreePanel.transform.GetChild(18 - questionNumber).GetChild(2).gameObject.SetActive(true);
     }
 
 
